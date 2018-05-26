@@ -14,3 +14,5 @@ struct GameData
 	int			days		; //Œo‰ß“ú”
 	int			popularity	; //•]”»
 };
+
+using GameData_Ptr = std::shared_ptr<GameData>;
