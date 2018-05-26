@@ -18,7 +18,7 @@ void GameManager::Update()
 {
 	z_commonScene.Update();
 	//ゲームオーバー
-	if (z_pGameData->money < 1 || z_pGameData->popularity < 0)
+	if (z_pGameData->money < 0 || z_pGameData->popularity < 0)
 		z_pGameData->state = GameState::GameOver;
 
 	//運営シーン
