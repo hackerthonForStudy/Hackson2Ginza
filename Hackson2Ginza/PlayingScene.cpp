@@ -10,7 +10,7 @@ void PlayingScene::Update()
 {
 	//ユーザープログレスの更新
 	z_time++;
-	if (z_time % z_userSpeed == 0)
+	if (z_time % (5 - z_pGameData->userLevel.level) == 0)
 		z_userProgress.Update();
 
 	//客の動き
@@ -40,11 +40,14 @@ void PlayingScene::Draw() const
 {
 	//ユーザープログレスの描画
 	z_userProgress.Draw();
+	if(!z_pGameData->userLevel.IsMax())
+		z_font(L"ユーザーレベル", z_pGameData->userLevel.level).draw(80, 20, Palette::Black);
+	else
+		z_font(L"プロフェッショナル").draw(40, 20, Palette::Black);
 
 	//お店の外観描画
 	Rect store{ 150, 80, 400, 500 };
 	store.drawFrame(1, 0, Palette::Gray);
-	z_font(L"ユーザーの行動").draw(80, 20, Palette::Black);
 
 	//テーブルの描画
 	z_table1.Draw();
@@ -112,7 +115,10 @@ void PlayingScene::CustomerUpdate()
 {
 	//お客様の入店
 	//評判がいいほどたくさん入ります
-	if (Random(0, 22000) < z_pGameData->popularity + 30)
+	std::random_device rd;
+	std::mt19937 mt(rd());
+	std::uniform_int_distribution<int> dice(0, 40000);
+	if (dice(mt) < z_pGameData->popularity + 50)
 		CustomerInStore();
 
 	//レジの客の動き

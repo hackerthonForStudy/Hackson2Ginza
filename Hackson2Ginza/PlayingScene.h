@@ -20,7 +20,6 @@ private:
 	Rezi	z_rezi;
 	ProglessBar z_userProgress;
 	int z_time = 0;
-	int z_userSpeed = 3;
 	std::deque<Customer> z_waitCustomers;
 	std::deque<Customer> z_reziCustomers;
 
